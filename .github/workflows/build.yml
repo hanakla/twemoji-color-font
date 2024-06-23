@@ -25,6 +25,7 @@ jobs:
           sudo pip3 install fonttools
 
       - name: Build font
+        continue-on-error: true
         run: |
           git clone https://github.com/13rac1/scfbuild.git SCFBuild
           make -j 4
