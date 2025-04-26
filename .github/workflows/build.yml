@@ -14,15 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: inkscape potrace npm nodejs fontforge \
-            devscripts python3-fontforge python3-pip python3-yaml imagemagick \
-            make debhelper build-essential
-          version: 1.0
-
       - name: Install dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install inkscape potrace npm nodejs fontforge \
+            devscripts python3-fontforge python3-pip python3-yaml imagemagick \
+            make debhelper build-essential
+
           sudo npm install -g svgo
           sudo pip3 install fonttools
 

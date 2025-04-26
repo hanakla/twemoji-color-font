@@ -115,8 +115,8 @@ $(REGULAR_FONT): $(SVG_BW_FILES) $(SVG_COLOR_FILES) copy-extra
 $(MACOS_FONT): $(SVG_BW_FILES) $(SVG_COLOR_FILES) copy-extra
 	$(SCFBUILD) -c scfbuild-macos.yml -o $(MACOS_FONT) --font-version="$(VERSION)"
 
-# copy-extra: build/svg-bw
-# 	cp $(SVG_EXTRA_BW)/* build/svg-bw/
+copy-extra: build/svg-bw
+	cp $(SVG_EXTRA_BW)/* build/svg-bw/
 
 # # Create black SVG traces of the color SVGs to use as glyphs.
 # # 1. Make the Twemoji SVG into a PNG with Inkscape
