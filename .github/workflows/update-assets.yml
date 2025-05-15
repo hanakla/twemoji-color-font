@@ -25,7 +25,7 @@ jobs:
       - name: Copy SVG files to assets/twemoji-svg
         run: |
           rm -rf assets/twemoji-svg/*
-          cp -r twemoji-latest/assets/svg/* assets/twemoji-svg/
+          cp -r twemoji-latest/*/assets/svg/* assets/twemoji-svg/
 
       - name: Check for changes
         run: |
