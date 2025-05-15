@@ -25,22 +25,16 @@ jobs:
       - name: Copy SVG files to assets/twemoji-svg
         run: |
           rm -rf assets/twemoji-svg/*
-          cp -r twemoji-latest/*/assets/svg/* assets/twemoji-svg/
-
-      - name: Check for changes
-        run: |
-          if git diff --quiet; then
-            echo "No changes detected. Exiting."
-            exit 0
-          fi
-
+          cp -r twemoji-latest/assets/svg/* assets/twemoji-svg/
       - name: Commit and create Pull Request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if git diff --quiet; then; exit 0; fi
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b update-twemoji-assets
+          git checkout -b update-twemoji-assets-${{ github.run_id }}
           git add assets/twemoji-svg
           git commit -m "Update Twemoji assets to latest release"
           gh pr create --title "Update Twemoji assets" --body "This PR updates the Twemoji assets to the latest release."
