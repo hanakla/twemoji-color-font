@@ -1,0 +1,47 @@
+name: Update Twemoji
+
+on: workflow_dispatch
+
+jobs:
+  update-twemoji:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Download latest Twemoji release
+        run: |
+          curl -s https://api.github.com/repos/jdecked/twemoji/releases/latest \
+            | jq -r '.zipball_url' \
+            | wget -i - -O twemoji-latest.zip
+
+      - name: Extract Twemoji archive
+        run: unzip -o twemoji-latest.zip -d twemoji-latest
+
+      - name: Copy SVG files to assets/twemoji-svg
+        run: |
+          rm -rf assets/twemoji-svg/*
+          cp -r twemoji-latest/assets/svg/* assets/twemoji-svg/
+
+      - name: Check for changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected. Exiting."
+            exit 0
+          fi
+
+      - name: Commit and create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b update-twemoji-assets
+          git add assets/twemoji-svg
+          git commit -m "Update Twemoji assets to latest release"
+          gh pr create --title "Update Twemoji assets" --body "This PR updates the Twemoji assets to the latest release."
+
