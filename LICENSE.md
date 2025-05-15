@@ -20,7 +20,7 @@ A few SVG files of the Twitter Emoji for Everyone project are used to fill in
 where Emoji One is missing characters required to generate a font. Files are
 stored in `assets/svg`.
 
-* Source: https://github.com/twitter/twemoji
+* Source: https://github.com/jdecked/twemoji
 * Art License: Creative Commons Attribution 4.0 International
 
 ## Power Symbol License

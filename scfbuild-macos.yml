@@ -15,8 +15,8 @@ color_transform: translate(0 -6.75)
 width_space: 561
 table_name:
   copyright: >
-    Copyright 2022 Brad Erickson CC-BY-4.0
-    Copyright 2022 Twitter, Inc. CC-BY-4.0
+    Copyright 2022-present Brad Erickson CC-BY-4.0
+    Copyright 2014-2021 Twitter, Inc. CC-BY-4.0
   family: Twitter Color Emoji
   # Subfamily is also called Style or Weight. Often set to: Regular
   subfamily: Regular
@@ -26,12 +26,12 @@ table_name:
   # Use the same postscript name as the Apple Color Emoji font to overide it.
   postscript_name: AppleColorEmoji
   #trademark:
-  manufacturer: 13rac1
+  manufacturer: Hanakla
   designer: Twitter, Inc.
   description: >
     A SVGinOT color emoji font using the Twitter Emoji for Everyone set:
-    https://github.com/13rac1/twemoji-color-font
-  url_vendor: https://github.com/13rac1/twemoji-color-font
-  url_designer: https://github.com/twitter/twemoji
+    https://github.com/hanakla/twemoji-color-font
+  url_vendor: https://github.com/hanakla/twemoji-color-font
+  url_designer: https://github.com/jdecked/twemoji
   license: Creative Commons Attribution 4.0 International
   url_license: http://creativecommons.org/licenses/by/4.0/

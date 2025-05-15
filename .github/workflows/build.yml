@@ -1,0 +1,34 @@
+name: Build Twemoji Color Font
+
+on: push
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install inkscape potrace npm nodejs fontforge \
+            devscripts python3-fontforge python3-pip python3-yaml imagemagick \
+            make debhelper build-essential
+
+          sudo npm install -g svgo
+          sudo pip3 install fonttools
+
+      - name: Build font
+        continue-on-error: true
+        run: |
+          git clone https://github.com/13rac1/scfbuild.git SCFBuild
+          make -j 4
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: twemoji-font-artifacts
+          path: |
+            build/
