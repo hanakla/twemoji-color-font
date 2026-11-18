@@ -14,10 +14,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Download latest Twemoji release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          curl -s https://api.github.com/repos/jdecked/twemoji/releases/latest \
-            | jq -r '.zipball_url' \
-            | wget -i - -O twemoji-latest.zip
+          url=$(gh api repos/jdecked/twemoji/releases/latest | jq -er '.zipball_url')
+          gh api "$url" > twemoji-latest.zip
 
       - name: Extract Twemoji archive
         run: unzip -o twemoji-latest.zip -d twemoji-latest
